@@ -2,8 +2,7 @@ CREATE TABLE IF NOT EXISTS files (
                                      id TEXT PRIMARY KEY,
                                      name TEXT NOT NULL,
                                      size INTEGER NOT NULL,
-                                     parts_count INTEGER NOT NULL,
-                                     file_hash TEXT NOT NULL
+                                     parts_count INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS file_parts (
