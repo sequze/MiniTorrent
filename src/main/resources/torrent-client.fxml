@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.torrents.client.view.ClientView"
+            prefHeight="600.0" prefWidth="900.0"
+            stylesheets="@style.css">
+
+    <top>
+        <VBox spacing="10" styleClass="connection-panel">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <Label text="MiniTorrent Client" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Сервер:"/>
+                <TextField fx:id="serverHostField" prefWidth="200" promptText="localhost"/>
+
+                <Label text="Порт:"/>
+                <TextField fx:id="serverPortField" prefWidth="80" promptText="6969"/>
+
+                <Button fx:id="connectButton" text="Подключиться" onAction="#handleConnect"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+                <Button fx:id="disconnectButton" text="Отключиться" onAction="#handleDisconnect"
+                        style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+            </HBox>
+
+            <Separator/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="5">
+            <padding>
+                <Insets top="5" right="10" bottom="5" left="10"/>
+            </padding>
+
+            <Label text="Доступные файлы" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+            <TableView fx:id="filesTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="filenameColumn" text="Имя файла" prefWidth="300"/>
+                    <TableColumn fx:id="sizeColumn" text="Размер" prefWidth="120"/>
+                    <TableColumn fx:id="progressColumn" text="Прогресс" prefWidth="200"/>
+                    <TableColumn fx:id="statusColumn" text="Статус" prefWidth="150"/>
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+            </TableView>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="10" right="0" bottom="0" left="0"/>
+                </padding>
+
+                <Button fx:id="addFileButton" text="Добавить файл" onAction="#handleAddFile"
+                        style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+                <Button fx:id="downloadButton" text="Скачать выбранный" onAction="#handleDownload"
+                        style="-fx-background-color: #FF9800; -fx-text-fill: white;"/>
+            </HBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: #f0f0f0;">
+            <padding>
+                <Insets top="5" right="10" bottom="5" left="10"/>
+            </padding>
+
+            <Label fx:id="statusLabel" text="Статус: Не подключено" style="-fx-font-weight: bold;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
+
