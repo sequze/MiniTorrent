@@ -48,6 +48,25 @@ public class PeerService implements ClientListener {
         return new ArrayList<>(peers.values());
     }
 
+    /**
+     * Graceful shutdown всех подключенных пиров
+     */
+    public void shutdownAllPeers() {
+        List<ClientHandler> handlers = new ArrayList<>(peers.values());
+        for (ClientHandler handler : handlers) {
+            try {
+                handler.setRunning(false);
+                logger.debug("Stopped peer: {}", handler.getClientId());
+            } catch (Exception e) {
+                logger.error("Error stopping peer {}: {}", handler.getClientId(), e.getMessage());
+            }
+        }
+
+        peers.clear();
+        busyPeers.clear();
+        logger.info("All peer connections shut down");
+    }
+
     @Override
     public void onClientDisconnected(String clientId) {
         logger.info("Peer disconnected and removed: {}", clientId);

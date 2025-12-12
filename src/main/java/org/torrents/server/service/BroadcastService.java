@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class BroadcastService {
     private static final Logger logger = LoggerFactory.getLogger(BroadcastService.class);
@@ -50,8 +51,21 @@ public class BroadcastService {
      * Остановить сервис рассылки
      */
     public void shutdown() {
-        logger.info("Shutting down broadcast service");
+        // Запрещаем новые задачи
         broadcastExecutor.shutdown();
+
+        try {
+            // Ждём завершения текущих
+            if (!broadcastExecutor.awaitTermination(5, TimeUnit.SECONDS)) {
+                // Принудительное завершение
+                broadcastExecutor.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            broadcastExecutor.shutdownNow();
+            Thread.currentThread().interrupt();
+        }
+
+        logger.info("Broadcast service shut down successfully");
     }
 }
 
