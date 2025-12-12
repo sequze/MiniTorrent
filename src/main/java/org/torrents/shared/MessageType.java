@@ -9,6 +9,6 @@ public enum MessageType {
     REQUEST_FILE,
     SEND_CHUNK,
     COMPLETE,
-    ERROR
+    ERROR,
+    ADD_FILE
 }
-
