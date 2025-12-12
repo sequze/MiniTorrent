@@ -1,4 +1,6 @@
-<img src="src/main/resources/app_icon.png" width="400" height="400" />
+<div align="center">
+  <img src="src/main/resources/app_icon.png" width="400" height="400" />
+</div>
 
 # Mini-Torrent
 
@@ -57,8 +59,8 @@
       }
     }
     ```
-  - если не указан partsNeeded, запрашивается весь файл
-  - requestId нужен для идентификации запроса при получении частей файла
+    - если не указан partsNeeded, запрашивается весь файл
+    - requestId нужен для идентификации запроса при получении частей файла
 4. **ADD_FILE** - клиент -> сервер: добавление нового файла для раздачи
 - payload:
     ```json
@@ -88,9 +90,9 @@
       }
     }
     ```
-    > - [4 байта] - длина JSON заголовка (int)
-    > - [N байт] - JSON заголовок
-    > - [4096 байт] - данные chunk
+  > - [4 байта] - длина JSON заголовка (int)
+  > - [N байт] - JSON заголовок
+  > - [4096 байт] - данные chunk
 
 5. **ERROR** - сообщение об ошибке
 - payload:
